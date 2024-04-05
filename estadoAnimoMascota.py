@@ -1,6 +1,11 @@
+import os
+
 import google.generativeai as genai
 import PIL.Image
+from dotenv import load_dotenv
 from flask import Flask, jsonify, request
+
+load_dotenv()
 
 # Configura el modelo y la API KEY
 GOOGLE_API_KEY = 'AIzaSyCQ-pNzRJ0SaE-zcvDFJZZ2Oj3UX_ClyiA'
@@ -35,4 +40,5 @@ def analizar_imagen():
     return (respuesta)  
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    port = int(os.getenv('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)

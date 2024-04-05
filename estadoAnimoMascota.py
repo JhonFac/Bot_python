@@ -4,6 +4,7 @@ import google.generativeai as genai
 import PIL.Image
 from dotenv import load_dotenv
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 load_dotenv()
 
@@ -13,7 +14,7 @@ genai.configure(api_key=GOOGLE_API_KEY)
 modelo = genai.GenerativeModel('gemini-pro-vision')
 
 app = Flask(__name__)
-
+CORS(app) 
 @app.route('/', methods=['GET'])
 def index():
     return 'hola'

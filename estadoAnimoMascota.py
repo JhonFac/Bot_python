@@ -1,7 +1,6 @@
 import google.generativeai as genai
 import PIL.Image
-from flask import Flask, request, jsonify
-
+from flask import Flask, jsonify, request
 
 # Configura el modelo y la API KEY
 GOOGLE_API_KEY = 'AIzaSyCQ-pNzRJ0SaE-zcvDFJZZ2Oj3UX_ClyiA'
@@ -9,6 +8,10 @@ genai.configure(api_key=GOOGLE_API_KEY)
 modelo = genai.GenerativeModel('gemini-pro-vision')
 
 app = Flask(__name__)
+
+@app.route('/', methods=['GET'])
+def index():
+    return 'hola'
 
 @app.route('/analizar', methods=['POST'])
 def analizar_imagen():
@@ -32,4 +35,4 @@ def analizar_imagen():
     return (respuesta)  
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')

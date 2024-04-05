@@ -1,12 +1,15 @@
-FROM python:3.8-alpine
+FROM python:3.12-alpine
 
 WORKDIR /code
-
 RUN pip install --upgrade pip
-
 COPY ./requirements.txt /requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
 COPY . .
+RUN pip install -r /requirements.txt
 
-CMD ["python", "estadoAnimoMascota.py"]
+COPY ./scripts /scripts/
+RUN chmod +x /scripts/*
+RUN apk add --no-cache dos2unix
+RUN dos2unix /scripts/entrypoint.sh
+
+CMD ["sh", "/scripts/entrypoint.sh"]
+

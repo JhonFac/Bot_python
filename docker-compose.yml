@@ -1,7 +1,9 @@
 version: "3.8"
 
 services:
-  myapp:
-    build: .
-    volumes:
-      - ./scripts:/app/scripts  
+    web:
+        build: .
+        ports:
+            - "5000:5000"
+        volumes:
+            - .:/code
